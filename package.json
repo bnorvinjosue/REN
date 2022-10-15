@@ -1,0 +1,25 @@
+{
+  "name": "revn",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "\"Rethink, Express, Vue And Node\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"dev\":\"node .\""
+  },
+  "keywords": [
+    "\"Rethink\""
+  ],
+  "author": "\"Norvin Bustamante\"",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "rethinkdb": "^2.4.2"
+  }
+}

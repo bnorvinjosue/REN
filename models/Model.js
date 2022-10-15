@@ -1,46 +1,48 @@
-import connect,{table} from "../database/connection.js";
+import connect, { table } from "../database/connection.js";
+import rethinkdb from "rethinkdb";
+const r = rethinkdb;
 
-export default class Model{
+export default class Model {
 
     //constructor data optionals
-    constructor(table){
+    constructor(table) {
         this.table = table;
     }
     data = {};
-    async save(){
+    async save() {
         const connection = await connect();
         const result = await table(this.table).insert(this.data).run(connection);
         return result;
     }
 
-    static async insert(query){
+    async insert(query) {
         const conn = await connect();
         const result = await table(this.table).insert(query).run(conn);
         return result;
     }
-    static async update(query){
+    async update(query) {
         const conn = await connect();
         const result = await table(this.table).update(query).run(conn);
         return result;
     }
-    static async delete(query){
+    async delete(row, param) {
         const conn = await connect();
-        const result = await table(this.table).delete(query).run(conn);
+        const result = await table(this.table).filter(r.row(row).eq(param)).delete().run(conn);
         return result;
     }
-    static async find(query){
+    async find(query) {
         const conn = await connect();
         const result = await table(this.table).filter(query).run(conn);
         return result;
     }
-    static async findOne(query){
+    async findOne(query) {
         const conn = await connect();
         const result = await table(this.table).filter(query).limit(1).run(conn);
         return result;
     }
-    static async findAll(){
+    async findAll() {
         const conn = await connect();
         const result = await table(this.table).run(conn);
-        return result;
+        return result._responses;
     }
 }
